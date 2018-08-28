@@ -1,0 +1,17 @@
+{
+  "name": "cuckoo-cycle",
+  "version": "0.1.0-0",
+  "description": "A JavaScript Cuckoo Cycle solver and verifier",
+  "license": "BSD-3-Clause",
+  "main": "lib",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/digitalbazaar/cuckoo-cycle.git"
+  },
+  "bugs": {
+    "url": "https://github.com/digitalbazaar/cuckoo-cycle/issues"
+  },
+  "homepage": "https://github.com/digitalbazaar/cuckoo-cycle#readme",
+  "dependencies": {},
+  "peerDependencies": {}
+}
