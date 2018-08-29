@@ -12,6 +12,9 @@
     "url": "https://github.com/digitalbazaar/cuckoo-cycle/issues"
   },
   "homepage": "https://github.com/digitalbazaar/cuckoo-cycle#readme",
-  "dependencies": {},
+  "dependencies": {
+    "chloride": "digitalbazaar/chloride#genericHash",
+    "long": "^4.0.0"
+  },
   "peerDependencies": {}
 }
