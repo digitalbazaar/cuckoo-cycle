@@ -6,4 +6,6 @@
 const api = {};
 module.exports = api;
 
+api.engines = require('./lib/engines');
+api.solve = require('./lib/solve').solve;
 api.verify = require('./lib/verify').verify;
