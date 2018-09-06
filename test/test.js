@@ -1,4 +1,5 @@
-const cuckoo = require('./index');
+const assert = require('assert');
+const cuckoo = require('..');
 const Long = require('long');
 
 const input = Buffer.allocUnsafe(0);
@@ -11,19 +12,11 @@ const solution = {
   edges
 };
 
-console.log('solution', solution);
-
-(async () => {
-  const start = Date.now();
-  const count = 10000;
-  for(let i = 0; i < count; ++i) {
-    try {
-      await cuckoo.verify({input, solution, graphSize: 20});
-    } catch(e) {
-      console.error(e);
-      throw e;
-    }
-  }
-  const end = Date.now();
-  console.log('total', (end - start) / count);
-})();
+describe('cuckoo', function() {
+  describe('verify', function() {
+    it('should verify known solution', function() {
+      //console.log('solution', solution);
+      return cuckoo.verify({input, solution, graphSize: 20});
+    });
+  });
+});

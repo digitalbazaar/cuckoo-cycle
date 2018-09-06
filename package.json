@@ -12,9 +12,17 @@
     "url": "https://github.com/digitalbazaar/cuckoo-cycle/issues"
   },
   "homepage": "https://github.com/digitalbazaar/cuckoo-cycle#readme",
+  "scripts": {
+    "test": "mocha",
+    "benchmark": "node benchmark/benchmark.js"
+  },
   "dependencies": {
     "chloride": "digitalbazaar/chloride#genericHash",
     "long": "^4.0.0"
   },
-  "peerDependencies": {}
+  "peerDependencies": {},
+  "devDependencies": {
+    "benchmark": "^2.1.4",
+    "mocha": "^5.2.0"
+  }
 }
