@@ -14,19 +14,24 @@ const solution = {
 
 //console.log('solution', solution);
 
-const suite = new Benchmark.Suite();
-suite
-  .add({
-    name: 'verify',
-    defer: true,
-    fn: deferred => {
-      cuckoo.verify({input, solution, graphSize: 20}).then(() => {
-        deferred.resolve();
-      });
-    }
-  })
-  .on('cycle', e => {
-    console.log(String(e.target));
-  })
-  //.on('complete', e => {})
-  .run({async: true});
+const api = {};
+module.exports = api;
+
+api.run = engine => {
+  const suite = new Benchmark.Suite();
+  suite
+    .add({
+      name: 'verify',
+      defer: true,
+      fn: deferred => {
+        cuckoo.verify({input, solution, graphSize: 20}).then(() => {
+          deferred.resolve();
+        });
+      }
+    })
+    .on('cycle', e => {
+      console.log(String(e.target));
+    })
+    //.on('complete', e => {})
+    .run({async: true});
+};
