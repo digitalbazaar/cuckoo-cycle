@@ -22,7 +22,8 @@ api.createTests = engine => {
       const result = await cuckoo.solve(opts);
       assert.deepStrictEqual(result, t.solution);
     });
-    it('should solve gs=30 in="" test', async () => {
+    // skipped due to resource and time usage
+    it.skip('should solve gs=30 in="" test', async () => {
       const t = common.cloneTest('g30_1');
       const opts = {
         engine,
@@ -34,17 +35,37 @@ api.createTests = engine => {
       const result = await cuckoo.solve(opts);
       assert.deepStrictEqual(result, t.solution);
     });
-    it.skip('should solve gs=20 in="test" test', async () => {
-      const t = common.cloneTest(common.DEFAULT_TEST);
+    it('should not solve gs=20 in="" difficult test', async () => {
+      const t_d1x = common.cloneTest('g20_1');
+      const t_d8x = common.cloneTest('g20_1_d8x');
+      // check no solution with 1x difficulty nonce
       const opts = {
         engine,
-        graphSize: 20,
-        input: Buffer.from('test'),
-        nonce: 11
+        graphSize: t_d8x.graphSize,
+        input: t_d8x.input,
+        // checking 1x nonce
+        nonce: t_d1x.solution.nonce,
+        maxNonces: 1,
+        difficulty: t_d8x.difficulty
       };
-      const result = await cuckoo.solve(opts);
-      //assert.deepStrictEqual(result, t.solution);
-      console.log('RESULT', result);
+      let err;
+      try {
+        await cuckoo.solve(opts);
+      } catch(e) {
+        err = e;
+      }
+      assert(err);
+      // check solution with 8x difficulty nonce
+      const opts2 = {
+        engine,
+        graphSize: t_d8x.graphSize,
+        input: t_d8x.input,
+        nonce: t_d8x.solution.nonce,
+        maxNonces: 1,
+        difficulty: t_d8x.difficulty
+      };
+      const result = await cuckoo.solve(opts2);
+      assert.deepStrictEqual(result, t_d8x.solution);
     });
   });
 };
