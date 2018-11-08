@@ -48,13 +48,8 @@ api.createTests = engine => {
         maxNonces: 1,
         difficulty: t_d8x.difficulty
       };
-      let err;
-      try {
-        await cuckoo.solve(opts);
-      } catch(e) {
-        err = e;
-      }
-      assert(err);
+      const s = await cuckoo.solve(opts);
+      assert(s === null);
       // check solution with 8x difficulty nonce
       const opts2 = {
         engine,
