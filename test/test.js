@@ -58,6 +58,20 @@ describe('cuckoo', function() {
       }
       assert(err);
     });
+    it('should fail for links < 1', async () => {
+      const opts = {
+        engine: 'test',
+        input: Buffer.alloc(33),
+        links: 0
+      };
+      let err;
+      try {
+        await cuckoo.solve(opts);
+      } catch(e) {
+        err = e;
+      }
+      assert(err);
+    });
     // NOTE: solver tests in engine packages
   });
 
@@ -124,6 +138,10 @@ describe('cuckoo', function() {
     it('should verify graphSize=30 solution', async () => {
       const opts = common.cloneTest('g30_1');
       return cuckoo.verify(opts);
+    });
+    it('should verify graphSize=20 links=2 solution', async () => {
+      const opts = common.cloneTest('g20_1_c2');
+      return cuckoo.verifyChain(opts);
     });
   });
 });

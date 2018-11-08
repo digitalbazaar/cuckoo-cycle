@@ -59,7 +59,32 @@ api.tests = {
       nonce: 63,
       edges: str2edges('23ece 27e0856 2ad8c27 2cbb0b5 3694cdd 477a095 64de6fc 64e1c92 68e624d 6aa4c6f 6b1d0c2 76f07d2 c273122 c2e38ed c655cde c97ba17 e708130 ec8890d ecb9932 f28d66d f577aff 104d8441 116de91f 116e61cb 1178ea28 11840f8a 11ce10b0 12792630 12ae2388 140ae893 1439b9fd 146a3047 1538d93c 176cb068 17e01c9b 1876ee0a 1c871774 1d37d976 1d6fa785 1d9c1669 1d9d015e 1db85f7e')
     }
-  }
+  },
+  g20_1_c2: {
+    graphSize: 20,
+    input: Buffer.allocUnsafe(0),
+    solution: [{
+      nonce: 38,
+      edges: [
+        8654, 21056, 54020, 54092, 63318, 64245, 93343, 107337,
+        119769, 133482, 139318, 153755, 189165, 191296, 195388, 227069,
+        227136, 234432, 240937, 249604, 258917, 270306, 277033, 283883,
+        315155, 315692, 341485, 359683, 396929, 430033, 430127, 431112,
+        443121, 469192, 474638, 484745, 499767, 503243, 509112, 513862,
+        518880, 523879
+      ]
+    }, {
+      nonce: 22,
+      edges: [
+        11265, 34846, 37576, 51372, 53471, 63204, 76088, 97265,
+        118417, 119341, 123817, 125374, 196503, 198206, 200054, 209736,
+        212403, 223034, 238733, 251033, 255919, 259397, 265605, 271915,
+        278522, 282658, 319130, 319899, 332825, 352211, 357379, 368148,
+        399013, 405042, 418773, 433177, 462889, 471937, 475930, 504059,
+        506109, 518786
+      ]
+    }]
+  },
 };
 
 api.DEFAULT_TEST = 'g20_1';
@@ -69,11 +94,22 @@ api.cloneTest = id => {
   const cloned = {
     graphSize: t.graphSize,
     input: Buffer.from(t.input),
-    solution: {
+    // solution set below
+  };
+  if(Array.isArray(t.solution)) {
+    cloned.solution = [];
+    for(const s of t.solution) {
+      cloned.solution.push({
+        nonce: s.nonce,
+        edges: Array.from(s.edges)
+      });
+    }
+  } else {
+    cloned.solution = {
       nonce: t.solution.nonce,
       edges: Array.from(t.solution.edges)
-    }
-  };
+    };
+  }
   if('difficulty' in t) {
     cloned.difficulty = Buffer.from(t.difficulty);
   }
