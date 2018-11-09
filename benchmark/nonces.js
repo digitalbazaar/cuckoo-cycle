@@ -4,7 +4,7 @@
  *
  * Copyright (c) 2018 Digital Bazaar, Inc.
  *
- * MIT License
+ * BSD License
  * <https://github.com/digitalbazaar/cuckoo-cycle/blob/master/LICENSE>
  */
 const common = require('../test/common.js');
