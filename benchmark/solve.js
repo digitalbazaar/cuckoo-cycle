@@ -29,7 +29,7 @@ api.run = engine => {
           //nonce: 0,
           //maxNonces: 40,
         };
-        cuckoo.solve(opts).then(s => {
+        cuckoo.solve(opts).then((/*s*/) => {
           //console.log('SOL', s);
           deferred.resolve();
         });
@@ -40,4 +40,4 @@ api.run = engine => {
     })
     //.on('complete', e => {})
     .run({async: true});
-}
+};

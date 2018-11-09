@@ -7,7 +7,6 @@
  * BSD License
  * <https://github.com/digitalbazaar/cuckoo-cycle/blob/master/LICENSE>
  */
-const common = require('../test/common.js');
 const cuckoo = require('..');
 const fs = require('fs');
 const path = require('path');
@@ -15,16 +14,16 @@ const path = require('path');
 const api = {};
 module.exports = api;
 
-function progress({results, info, last=false}) {
+function progress({results, info, last = false}) {
   if(process.env.DATADIR) {
     if(last || (results.length % 10 === 0)) {
-      savedata(...arguments);
+      savedata({results, info, last});
     }
   }
 }
-const filePrefix = (new Date).toISOString().replace(/[^0-9]/g,'');
+const filePrefix = (new Date).toISOString().replace(/[^0-9]/g, '');
 const uniqf = new Map();
-function savedata({results, info, last=false}) {
+function savedata({results, info, last = false}) {
   const idxname =
     `${filePrefix}-${info.engine}-g${info.graphSize}-e${info.edgeCount}` +
     `-${info.tag}`;
@@ -42,11 +41,18 @@ function savedata({results, info, last=false}) {
   console.log('Wrote results:', filename);
 }
 
-api.findNonces = async ({engine, graphSize, edgeCount, count, difficulty, tag=''}) => {
+api.findNonces = async (
+  {engine, graphSize, edgeCount, count, difficulty, tag = ''}) => {
   // 32b input buffer
   const input = Buffer.alloc(4, 0);
   const results = [];
-  console.log(`FIND engine:${JSON.stringify(engine)} graphSize:${graphSize} edgeCount:${edgeCount} count:${count} tag:${tag} filePrefix:${filePrefix}`);
+  console.log(`FIND ` +
+    `engine:${JSON.stringify(engine)} ` +
+    `graphSize:${graphSize} ` +
+    `edgeCount:${edgeCount} ` +
+    `count:${count} ` +
+    `tag:${tag} ` +
+    `filePrefix:${filePrefix}`);
   const info = {
     engine: engine.name || engine,
     graphSize,
@@ -85,7 +91,7 @@ api.findNonces = async ({engine, graphSize, edgeCount, count, difficulty, tag=''
       console.log(`NOT FOUND i:${i} dt:${dt}`);
       // FIXME
     }
-    progress({results, info, last: false})
+    progress({results, info, last: false});
   }
-  progress({results, info, last: true})
+  progress({results, info, last: true});
 };
