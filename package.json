@@ -13,8 +13,9 @@
   },
   "homepage": "https://github.com/digitalbazaar/cuckoo-cycle#readme",
   "scripts": {
-    "test": "mocha",
-    "benchmark": "node benchmark/benchmark.js"
+    "benchmark": "node benchmark/benchmark.js",
+    "lint": "eslint index.js lib/*.js test/*.js benchmark/*.js",
+    "test": "mocha"
   },
   "dependencies": {
     "chloride": "digitalbazaar/chloride#genericHash",
@@ -23,6 +24,7 @@
   "peerDependencies": {},
   "devDependencies": {
     "benchmark": "^2.1.4",
+    "eslint": "^5.9.0",
     "mocha": "^5.2.0"
   },
   "engines": {
