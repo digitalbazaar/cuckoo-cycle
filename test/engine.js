@@ -10,12 +10,25 @@ api.createTests = engine => {
   describe('solve', function() {
     // tests can take a long time to solve
     this.timeout(0);
-    it('should solve gs=20 in="" test', async () => {
+    it('should solve gs=20 sh=2-4 in="" test', async () => {
       const t = common.cloneTest('g20_1');
       const opts = {
         engine,
         graphSize: t.graphSize,
         input: t.input,
+        nonce: t.solution.nonce,
+        maxNonces: 1
+      };
+      const result = await cuckoo.solve(opts);
+      assert.deepStrictEqual(result, t.solution);
+    });
+    it('should solve gs=20 sh=2-5 in="" test', async () => {
+      const t = common.cloneTest('g20_sh25_1');
+      const opts = {
+        engine,
+        graphSize: t.graphSize,
+        input: t.input,
+        sipHash: t.sipHash,
         nonce: t.solution.nonce,
         maxNonces: 1
       };

@@ -35,6 +35,22 @@ api.tests = {
       edges: str2edges('21ce 5240 d304 d34c f756 faf5 16c9f 1a349 1d3d9 2096a 22036 2589b 2e2ed 2eb40 2fb3c 376fd 37740 393c0 3ad29 3cf04 3f365 41fe2 43a29 454eb 4cf13 4d12c 535ed 57d03 60e81 68fd1 6902f 69408 6c2f1 728c8 73e0e 76589 7a037 7adcb 7c4b8 7d746 7eae0 7fe67')
     }
   },
+  g20_sh25_1: {
+    graphSize: 20,
+    input: Buffer.allocUnsafe(0),
+    sipHash: 'SipHash-2-5',
+    solution: {
+      nonce: 57,
+      edges: [
+        4929, 10568, 18146, 19446, 23244, 27221, 37213, 45384,
+        46731, 54141, 61819, 67234, 68919, 81300, 108640, 120278,
+        138321, 148672, 156560, 156850, 195518, 216670, 224925, 228393,
+        232756, 246875, 247723, 254351, 256610, 265051, 274802, 277819,
+        286785, 321606, 321877, 327732, 347322, 364364, 365793, 384565,
+        453105, 481276
+      ]
+    }
+  },
   g20_1_d8x: {
     graphSize: 20,
     input: Buffer.allocUnsafe(0),
@@ -96,6 +112,9 @@ api.cloneTest = id => {
     input: Buffer.from(t.input),
     // solution set below
   };
+  if('sipHash' in t) {
+    cloned.sipHash = t.sipHash;
+  }
   if(Array.isArray(t.solution)) {
     cloned.solution = [];
     for(const s of t.solution) {
