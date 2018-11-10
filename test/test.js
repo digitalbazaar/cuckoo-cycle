@@ -57,11 +57,11 @@ describe('cuckoo', function() {
       }
       assert(err);
     });
-    it('should fail for links < 1', async () => {
+    it('should fail for chain length < 1', async () => {
       const opts = {
         engine: 'test',
         input: Buffer.alloc(33),
-        links: 0
+        chainLength: 0
       };
       let err;
       try {
@@ -142,7 +142,7 @@ describe('cuckoo', function() {
       const opts = common.cloneTest('g30_1');
       return cuckoo.verify(opts);
     });
-    it('should verify graphSize=20 links=2 solution', async () => {
+    it('should verify graphSize=20 cl=2 solution', async () => {
       const opts = common.cloneTest('g20_1_c2');
       return cuckoo.verifyChain(opts);
     });

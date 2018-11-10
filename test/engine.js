@@ -75,19 +75,39 @@ api.createTests = engine => {
       const result = await cuckoo.solve(opts2);
       assert.deepStrictEqual(result, t_d8x.solution);
     });
-    it('should solve chain gs=20 in="" links=2 test', async () => {
+    it('should solve chain gs=20 in="" cl=2 test', async () => {
       const t = common.cloneTest('g20_1_c2');
       const opts = {
         engine,
         graphSize: t.graphSize,
         input: t.input,
-        nonce: t.solution.nonce,
-        //maxNonces: 1,
-        maxNonces: 1000,
-        links: 2
+        nonces: t.solution.map(s => s.nonce),
+        maxNonces: 1,
+        maxChainNonces: t.chainLength,
+        chainLength: t.chainLength
       };
       const result = await cuckoo.solveChain(opts);
       assert.deepStrictEqual(result, t.solution);
+    });
+    it('should not solve chain gs=20 in="" cl=2 test', async () => {
+      const t = common.cloneTest('g20_1_c2');
+      const opts = {
+        engine,
+        graphSize: t.graphSize,
+        input: t.input,
+        nonces: t.solution.map(s => s.nonce),
+        maxNonces: 1,
+        // force not enough nonces
+        maxChainNonces: t.chainLength - 1,
+        chainLength: t.chainLength
+      };
+      let err;
+      try {
+        await cuckoo.solveChain(opts);
+      } catch(e) {
+        err = e;
+      }
+      assert(err);
     });
   });
 };
