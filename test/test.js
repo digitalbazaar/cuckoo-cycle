@@ -130,8 +130,12 @@ describe('cuckoo', function() {
       }
       assert(err);
     });
-    it('should verify graphSize=20 solution', async () => {
+    it('should verify graphSize=20 sh=2-4 solution', async () => {
       const opts = common.cloneTest('g20_1');
+      return cuckoo.verify(opts);
+    });
+    it('should verify graphSize=20 sh=2-5 solution', async () => {
+      const opts = common.cloneTest('g20_sh25_1');
       return cuckoo.verify(opts);
     });
     it('should verify graphSize=30 solution', async () => {
