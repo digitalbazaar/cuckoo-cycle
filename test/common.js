@@ -27,7 +27,7 @@ api.DIFFICULTY_MAX = Buffer.allocUnsafe(32).fill(0x00);
 api.DIFFICULTY_16X[31] = 0x01;
 
 api.tests = {
-  g20_1: {
+  cuckoo_g20_sh24_1: {
     graphSize: 20,
     input: Buffer.allocUnsafe(0),
     solution: {
@@ -41,7 +41,23 @@ api.tests = {
         '7eae0 7fe67')
     }
   },
-  g20_sh25_1: {
+  cuckatoo_g20_sh24_1: {
+    variant: 'cuckatoo',
+    graphSize: 20,
+    input: Buffer.allocUnsafe(0),
+    solution: {
+      nonce: 68,
+      edges: str2edges(
+        '6330 6fc9 a191 a9f2 b847 e22a ed86 11ee8 ' +
+        '12c42 1a7da 1b479 1c032 27a88 29dee 2b5c1 2c03c ' +
+        '2ea3a 30440 31827 397a1 3f561 40979 42995 42e05 ' +
+        '42fd5 47e43 4dbec 5108e 512de 5203b 56793 5d269 ' +
+        '5fd3c 60a06 65942 6bdea 6d92a 6f1d6 71797 757c5 ' +
+        '782e3 7edb4')
+    }
+  },
+
+  cuckoo_g20_sh25_1: {
     graphSize: 20,
     input: Buffer.allocUnsafe(0),
     sipHash: 'SipHash-2-5',
@@ -57,7 +73,25 @@ api.tests = {
       ]
     }
   },
-  g20_1_d8x: {
+  cuckatoo_g20_sh25_1: {
+    variant: 'cuckatoo',
+    graphSize: 20,
+    input: Buffer.allocUnsafe(0),
+    sipHash: 'SipHash-2-5',
+    solution: {
+      nonce: 9,
+      edges: [
+        7866, 44502, 49255, 53680, 67697, 85982, 86534, 144485,
+        153577, 162992, 167952, 204206, 212258, 252422, 263580, 264269,
+        270301, 271752, 280975, 287370, 302300, 313220, 334187, 357809,
+        361681, 366001, 372257, 383098, 388543, 404059, 409598, 411859,
+        415967, 420671, 432653, 436594, 448819, 467143, 491692, 498645,
+        504665, 509683
+      ]
+    }
+  },
+
+  cuckoo_g20_sh24_1_d8x: {
     graphSize: 20,
     input: Buffer.allocUnsafe(0),
     solution: {
@@ -73,8 +107,26 @@ api.tests = {
     },
     difficulty: api.DIFFICULTY_8X
   },
+  cuckatoo_g20_sh24_1_d8x: {
+    variant: 'cuckatoo',
+    graphSize: 20,
+    input: Buffer.allocUnsafe(0),
+    solution: {
+      nonce: 781,
+      edges: [
+        19850, 27932, 33253, 44285, 71260, 77393, 77829, 79965,
+        91078, 92963, 101085, 112022, 125192, 129569, 139485, 166472,
+        170093, 187005, 204895, 230485, 235350, 244673, 257861, 259416,
+        262786, 266968, 284869, 333039, 338815, 381642, 387485, 388219,
+        405747, 433158, 445510, 448144, 459896, 464454, 471036, 490717,
+        491868, 504412
+      ]
+    },
+    difficulty: api.DIFFICULTY_8X
+  },
+
   // from: https://github.com/tromp/cuckoo/blob/master/GPU.md
-  g30_1: {
+  cuckoo_g30_sh24_1: {
     graphSize: 30,
     input: Buffer.allocUnsafe(0),
     solution: {
@@ -88,7 +140,30 @@ api.tests = {
         '1d6fa785 1d9c1669 1d9d015e 1db85f7e')
     }
   },
-  g20_1_c2: {
+  // calculated from code
+  cuckatoo_g30_sh24_1: {
+    variant: 'cuckatoo',
+    graphSize: 30,
+    input: Buffer.allocUnsafe(0),
+    solution: {
+      nonce: 20,
+      edges: [
+        4762082, 10285123, 22399536, 26167171,
+        38336620, 40016484, 96130898, 120468841,
+        155039584, 159202103, 165697136, 171007322,
+        171274657, 172546886, 175609526, 180631057,
+        191140143, 196527902, 197954529, 205038650,
+        223324825, 234981990, 238544028, 262764026,
+        293101621, 306427402, 310980000, 337335379,
+        344179616, 352670302, 369571116, 370679779,
+        400794074, 403399966, 412735096, 422686907,
+        425747528, 453252693, 455876781, 467118140,
+        470144432, 470523050
+      ]
+    }
+  },
+
+  cuckoo_g20_sh24_1_c2: {
     graphSize: 20,
     input: Buffer.allocUnsafe(0),
     chainLength: 2,
@@ -114,9 +189,36 @@ api.tests = {
       ]
     }]
   },
+  cuckatoo_g20_sh24_1_c2: {
+    variant: 'cuckatoo',
+    graphSize: 20,
+    input: Buffer.allocUnsafe(0),
+    chainLength: 2,
+    solution: [{
+      nonce: 68,
+      edges: [
+        25392, 28617, 41361, 43506, 47175, 57898, 60806, 73448,
+        76866, 108506, 111737, 114738, 162440, 171502, 177601, 180284,
+        191034, 197696, 202791, 235425, 259425, 264569, 272789, 273925,
+        274389, 294467, 318444, 331918, 332510, 335931, 354195, 381545,
+        392508, 395782, 416066, 441834, 448810, 455126, 464791, 481221,
+        492259, 519604,
+      ]
+    }, {
+      nonce: 17,
+      edges: [
+        17286, 23280, 32428, 34039, 35778, 40812, 79832, 132095,
+        135900, 183100, 187742, 197219, 209449, 217533, 228820, 229054,
+        237880, 246348, 258323, 259115, 283621, 284189, 293157, 305829,
+        307060, 307520, 307665, 325227, 346414, 350101, 376317, 378693,
+        379164, 383571, 390607, 399197, 422706, 436483, 448347, 451640,
+        465018, 495242
+      ]
+    }]
+  },
 };
 
-api.DEFAULT_TEST = 'g20_1';
+api.DEFAULT_TEST = 'cuckatoo_g20_sh24_1';
 
 api.cloneTest = id => {
   const t = api.tests[id];
@@ -125,7 +227,7 @@ api.cloneTest = id => {
     input: Buffer.from(t.input),
     // solution set below
   };
-  for(const key of ['sipHash', 'chainLength']) {
+  for(const key of ['variant', 'sipHash', 'chainLength']) {
     if(key in t) {
       cloned[key] = t[key];
     }

@@ -130,20 +130,40 @@ describe('cuckoo', function() {
       }
       assert(err);
     });
-    it('should verify graphSize=20 sh=2-4 solution', async () => {
-      const opts = common.cloneTest('g20_1');
+
+    // cuckoo variant
+    it('should verify cuckoo_g20_sh24 solution', async () => {
+      const opts = common.cloneTest('cuckoo_g20_sh24_1');
       return cuckoo.verify(opts);
     });
-    it('should verify graphSize=20 sh=2-5 solution', async () => {
-      const opts = common.cloneTest('g20_sh25_1');
+    it('should verify cuckoo_g20_sh25 solution', async () => {
+      const opts = common.cloneTest('cuckoo_g20_sh25_1');
       return cuckoo.verify(opts);
     });
-    it('should verify graphSize=30 solution', async () => {
-      const opts = common.cloneTest('g30_1');
+    it('should verify cuckoo_g30_sh24 solution', async () => {
+      const opts = common.cloneTest('cuckoo_g30_sh24_1');
       return cuckoo.verify(opts);
     });
-    it('should verify graphSize=20 cl=2 solution', async () => {
-      const opts = common.cloneTest('g20_1_c2');
+    it('should verify cuckoo_g20_cl2 solution', async () => {
+      const opts = common.cloneTest('cuckoo_g20_sh24_1_c2');
+      return cuckoo.verifyChain(opts);
+    });
+
+    // cuckatoo variant
+    it('should verify cuckatoo_g20_sh24 solution', async () => {
+      const opts = common.cloneTest('cuckatoo_g20_sh24_1');
+      return cuckoo.verify(opts);
+    });
+    it('should verify cuckatoo_g20_sh25 solution', async () => {
+      const opts = common.cloneTest('cuckatoo_g20_sh25_1');
+      return cuckoo.verify(opts);
+    });
+    it('should verify cuckatoo_g30_sh24 solution', async () => {
+      const opts = common.cloneTest('cuckatoo_g30_sh24_1');
+      return cuckoo.verify(opts);
+    });
+    it('should verify cuckatoo_g20_sh24_cl2 solution', async () => {
+      const opts = common.cloneTest('cuckatoo_g20_sh24_1_c2');
       return cuckoo.verifyChain(opts);
     });
   });
